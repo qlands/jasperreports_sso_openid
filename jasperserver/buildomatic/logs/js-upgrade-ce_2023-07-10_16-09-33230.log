@@ -1,0 +1,464 @@
+----------------------------------------------------------------------
+Running JasperReports Server upgrade script at 2023-07-10_16-09
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+Using ANT_OPTS: -Dnet.sf.ehcache.disabled=true -Xms512m -Xmx2048m -noverify
+----------------------------------------------------------------------
+[default]
+Running upgrade-minimal-ce Ant task.
+----------------------------------------------------------------------
+Buildfile: /opt/bitnami/jasperreports/buildomatic/build.xml
+     [exec] Result: 128
+     [echo] Back-End version: fatal: not a git repository (or any of the parent directories): .git-SNAPSHOT
+     [echo] Front-End version: fatal: not a git repository (or any of the parent directories): .git-SNAPSHOT
+     [echo] creating /opt/bitnami/jasperreports/buildomatic/build_conf/default
+   [delete] Deleting directory /opt/bitnami/jasperreports/buildomatic/build_conf/default
+    [mkdir] Created dir: /opt/bitnami/jasperreports/buildomatic/build_conf/default
+     [copy] Copying 1 file to /opt/bitnami/jasperreports/buildomatic/build_conf/default
+     [copy] Copying 1 file to /opt/bitnami/jasperreports/buildomatic/build_conf/default
+     [copy] Copying 1 file to /opt/bitnami/jasperreports/buildomatic/build_conf/default
+     [copy] Copying 1 file to /opt/bitnami/jasperreports/buildomatic/build_conf/default
+     [copy] Copying 1 file to /opt/bitnami/jasperreports/buildomatic/build_conf/default
+     [echo] chkAndSetLocaleDbSettings: parse: scripts.properties for db commands
+     [copy] Copying 30 files to /opt/bitnami/jasperreports/buildomatic/build_conf/default
+     [copy] Copying 1 file to /opt/bitnami/jasperreports/buildomatic
+     [copy] Copying 1 file to /opt/bitnami/jasperreports/buildomatic/build_conf/default/webapp/WEB-INF
+     [copy] Copying 1 file to /opt/bitnami/jasperreports/buildomatic/build_conf/default
+     [copy] Copying 1 file to /opt/bitnami/jasperreports/buildomatic/build_conf/default/webapp/WEB-INF/classes
+     [copy] Warning: Could not find file /opt/bitnami/jasperreports/buildomatic/conf_source/templates/keystore-configuration.xml to copy.
+     [echo] Maven settings: /opt/bitnami/jasperreports/buildomatic/build_conf/default/maven_settings.xml
+
+check-install-type-ce:
+
+set-minimal-mode:
+
+gen-config:
+     [echo] Regen config files if they have already been cleaned:
+     [echo] currentConf= /opt/bitnami/jasperreports/buildomatic/build_conf/default
+     [echo] Back-End version: fatal: not a git repository (or any of the parent directories): .git-SNAPSHOT
+     [echo] Front-End version: fatal: not a git repository (or any of the parent directories): .git-SNAPSHOT
+     [echo] chkAndSetLocaleDbSettings: parse: scripts.properties for db commands
+
+test-ce-all-props:
+     [echo] Checking properties:
+     [echo]   dbType=mysql
+     [echo]   dbHost=192.169.1.5
+     [echo]   dbUsername=root
+     [echo]   dbPassword=**********
+     [echo]   dbPort=3306
+     [echo]   js.dbName=bitnami_jasperreports
+     [echo]   sugarcrm.dbName=sugarcrm
+     [echo]   foodmart.dbName=foodmart
+     [echo]   webAppNameCE=jasperserver
+     [echo]   appServerType=tomcat
+     [echo]   appServerDir=/opt/bitnami/tomcat
+
+check-dbtype-for-upgrade-ce:
+
+do-install-upgrade-test:
+     [echo] Checking DBMS host and port:
+     [echo] About to validate port: 192.169.1.5:3306
+     [echo]   Port 3306 is OK
+     [echo] Done validating port: 192.169.1.5:3306
+     [echo] Validating administrative database connection at jdbc:mysql://192.169.1.5:3306/bitnami_jasperreports. Phase: [test]
+[advanced-sql] Executing commands
+[advanced-sql] 1 of 1 SQL statements executed successfully
+     [echo] Connection OK
+     [echo] Validating JasperServer database connection at jdbc:mysql://192.169.1.5:3306/bitnami_jasperreports?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnectForPools=true&amp;tinyInt1isBit=false&amp;allowPublicKeyRetrieval=true. Phase: [test]
+[advanced-sql] Executing commands
+[advanced-sql] 1 of 1 SQL statements executed successfully
+     [echo] Connection OK
+
+do-pre-upgrade-test:
+
+pre-upgrade-test-ce:
+
+upgrade-js-ce-db-minimal:
+
+upgrade-8.0-8.1-ce:
+     [echo]  
+     [echo]  currentSqlDir = /opt/bitnami/jasperreports/buildomatic/install_resources/sql/mysql 
+     [echo]  dbType = mysql 
+     [echo]  
+     [echo] run script: /opt/bitnami/jasperreports/buildomatic/install_resources/sql/mysql/upgrade-mysql-8.0.0-8.1.0-ce.sql 
+[advanced-sql] Executing resource: /opt/bitnami/jasperreports/buildomatic/install_resources/sql/mysql/upgrade-mysql-8.0.0-8.1.0-ce.sql
+[advanced-sql] Failed to execute:  create table JIFavoriteResource ( id bigint not null auto_increment, user_id bigint not null, resource_id bigint not null, creation_date datetime not null, primary key (id) ) engine=InnoDB
+[advanced-sql] java.sql.SQLSyntaxErrorException: (conn=12) Table 'JIFavoriteResource' already exists
+[advanced-sql] Failed to execute:   alter table JIFavoriteResource add constraint UKrj25jnmtcmddlfp23n7duhpv unique (user_id, resource_id)
+[advanced-sql] java.sql.SQLSyntaxErrorException: (conn=12) Duplicate key name 'UKrj25jnmtcmddlfp23n7duhpv'
+[advanced-sql] Failed to execute:   alter table JIFavoriteResource add constraint FKe3ak4arnheeorbrsc4u8m8pi0 foreign key (user_id) references JIUser (id) on delete cascade
+[advanced-sql] java.sql.SQLException: (conn=12) Duplicate foreign key constraint name 'FKe3ak4arnheeorbrsc4u8m8pi0'
+[advanced-sql] Failed to execute:   alter table JIFavoriteResource add constraint FK63man3dkmekfr2hgfifi3ne8c foreign key (resource_id) references JIResource (id) on delete cascade
+[advanced-sql] java.sql.SQLException: (conn=12) Duplicate foreign key constraint name 'FK63man3dkmekfr2hgfifi3ne8c'
+[advanced-sql] Failed to execute:   create index JIFavoriteResource_resource_id_idx on JIFavoriteResource (resource_id)
+[advanced-sql] java.sql.SQLSyntaxErrorException: (conn=12) Duplicate key name 'JIFavoriteResource_resource_id_idx'
+[advanced-sql] 0 of 5 SQL statements executed successfully
+
+keystore-properties:
+
+import-minimal-for-upgrade-ce:
+     [echo]  --- (import-export.xml:run-import-export) archiveArg = --input-zip=/opt/bitnami/jasperreports/buildomatic/install_resources/export/js-catalog-mysql-minimal-ce.zip --- 
+     [echo]              dbType = mysql
+     [echo]             jdbcJar = mariadb-java-client-2.5.3.jar
+     [echo]         currentConf = /opt/bitnami/jasperreports/buildomatic/build_conf/default
+     [echo]  importExportConfig = /opt/bitnami/jasperreports/buildomatic/conf_source/ieCe
+     [echo]  
+     [echo] Validating JasperServer database connection at jdbc:mysql://192.169.1.5:3306/bitnami_jasperreports?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnectForPools=true&amp;tinyInt1isBit=false&amp;allowPublicKeyRetrieval=true. Phase: [import-export-test]
+[advanced-sql] Executing commands
+[advanced-sql] 1 of 1 SQL statements executed successfully
+     [echo] Connection OK
+     [java] First resource path: /opt/bitnami/jasperreports/buildomatic/conf_source/ieCe
+     [java] Loading configuration resources
+     [java] Initialization complete
+     [java] Processing started
+     [java] Updated tenant organizations
+     [java] Role ROLE_ADMINISTRATOR already exists, skipping.
+     [java] Role ROLE_USER already exists, skipping.
+     [java] Role ROLE_ANONYMOUS already exists, skipping.
+     [java] User jasperadmin already exists, skipping.
+     [java] User anonymousUser already exists, skipping.
+     [java] Updating folder /
+     [java] Updating folder /themes
+     [java] Updating folder /themes/default
+     [java] Updating folder /themes/easy_access
+     [java] Updating folder /themes/jasper_dark
+     [java] Updating folder /themes/pods_summer
+     [java] Updating folder /themes/default/domainTopic
+     [java] Updating folder /themes/default/fonts
+     [java] Updating folder /themes/default/images
+     [java] Updating folder /themes/default/jasper-ui
+     [java] Updating folder /themes/default/jquery-ui
+     [java] Updating folder /themes/jasper_dark/images
+     [java] Updating folder /themes/pods_summer/images
+     [java] Updating folder /themes/default/jasper-ui/fonts
+     [java] Updating folder /themes/default/jasper-ui/images
+     [java] Updating folder /themes/default/jquery-ui/images
+     [java] Updated resource /themes/default/attributes.css
+     [java] Updated resource /themes/default/buttons.css
+     [java] Updated resource /themes/default/containers.css
+     [java] Updated resource /themes/default/controls.css
+     [java] Updated resource /themes/default/dataDisplays.css
+     [java] Updated resource /themes/default/dialog.css
+     [java] Updated resource /themes/default/dialogSpecific.css
+     [java] Updated resource /themes/default/forPrint.css
+     [java] Updated resource /themes/default/importExport.css
+     [java] Updated resource /themes/default/lists.css
+     [java] Updated resource /themes/default/manageTenants.css
+     [java] Updated resource /themes/default/menu.css
+     [java] Updated resource /themes/default/notifications.css
+     [java] Updated resource /themes/default/overrides_custom.css
+     [java] Updated resource /themes/default/overrides_ie.css
+     [java] Updated resource /themes/default/overrides_ie7.css
+     [java] Updated resource /themes/default/overrides_ie8.css
+     [java] Updated resource /themes/default/pages.css
+     [java] Updated resource /themes/default/pageSpecific.css
+     [java] Updated resource /themes/default/pagination.css
+     [java] Updated resource /themes/default/panel.css
+     [java] Updated resource /themes/default/samples.css
+     [java] Updated resource /themes/default/simpleColorPicker.css
+     [java] Updated resource /themes/default/theme.css
+     [java] Updated resource /themes/default/themeMinimal.css
+     [java] Updated resource /themes/default/webPageView.css
+     [java] Updated resource /themes/easy_access/overrides_custom.css
+     [java] Updated resource /themes/jasper_dark/overrides_custom.css
+     [java] Updated resource /themes/pods_summer/overrides_custom.css
+     [java] Updated resource /themes/default/domainTopic/saveAsTopic.css
+     [java] Updated resource /themes/default/fonts/operators.eot
+     [java] Updated resource /themes/default/fonts/operators.svg
+     [java] Updated resource /themes/default/fonts/operators.ttf
+     [java] Updated resource /themes/default/fonts/operators.woff
+     [java] Updated resource /themes/default/fonts/sourcesanspro-bold.ttf
+     [java] Updated resource /themes/default/fonts/sourcesanspro-bold-webfont.woff
+     [java] Updated resource /themes/default/fonts/sourcesanspro-bold-webfont.woff2
+     [java] Updated resource /themes/default/fonts/sourcesanspro-regular.ttf
+     [java] Updated resource /themes/default/fonts/sourcesanspro-regular-webfont.woff
+     [java] Updated resource /themes/default/fonts/sourcesanspro-regular-webfont.woff2
+     [java] Updated resource /themes/default/fonts/sourcesanspro-semibold.ttf
+     [java] Updated resource /themes/default/fonts/sourcesanspro-semibold-webfont.woff
+     [java] Updated resource /themes/default/fonts/sourcesanspro-semibold-webfont.woff2
+     [java] Updated resource /themes/default/images/adhoc_datatree_icons_sprite.png
+     [java] Updated resource /themes/default/images/adhoc_datatree_icons_sprite@1x.png
+     [java] Updated resource /themes/default/images/adhoc_datatree_icons_sprite@2x.png
+     [java] Updated resource /themes/default/images/adhoc_icons_sprite.png
+     [java] Updated resource /themes/default/images/adhoc_toolbar_buttons_sprite.png
+     [java] Updated resource /themes/default/images/alert_icons_sprite.svg
+     [java] Updated resource /themes/default/images/area_thumb.png
+     [java] Updated resource /themes/default/images/aws_logo.png
+     [java] Updated resource /themes/default/images/banner_bkgd.png
+     [java] Updated resource /themes/default/images/banner_icons_sprite@1x.png
+     [java] Updated resource /themes/default/images/banner_icons_sprite@2x.png
+     [java] Updated resource /themes/default/images/bar_thumb.png
+     [java] Updated resource /themes/default/images/bg_signin.jpg
+     [java] Updated resource /themes/default/images/button_action_icons_sprite.svg
+     [java] Updated resource /themes/default/images/button_action_icons_sprite@1x.png
+     [java] Updated resource /themes/default/images/button_action_icons_sprite@2x.png
+     [java] Updated resource /themes/default/images/button_action_primary_sprite.png
+     [java] Updated resource /themes/default/images/button_action_simple_sprite.png
+     [java] Updated resource /themes/default/images/button_action_sprite.png
+     [java] Updated resource /themes/default/images/button_action_square_icons_sprite.png
+     [java] Updated resource /themes/default/images/button_capsule_sprite.png
+     [java] Updated resource /themes/default/images/button_formatting_sprite.png
+     [java] Updated resource /themes/default/images/button_options_sprite.png
+     [java] Updated resource /themes/default/images/chart_options_button_sprite.png
+     [java] Updated resource /themes/default/images/chart_options_icon_sprite@1x.png
+     [java] Updated resource /themes/default/images/chart_options_icon_sprite@2x.png
+     [java] Updated resource /themes/default/images/chart_type_sprite.png
+     [java] Updated resource /themes/default/images/column_header_bkgd.png
+     [java] Updated resource /themes/default/images/column_thumb.png
+     [java] Updated resource /themes/default/images/control_icons_sprite_vertical.png
+     [java] Updated resource /themes/default/images/control_icons_sprite.png
+     [java] Updated resource /themes/default/images/cursor_copy.cur
+     [java] Updated resource /themes/default/images/cursor_copy.png
+     [java] Updated resource /themes/default/images/dashboard_content_icons_sprite@1x.png
+     [java] Updated resource /themes/default/images/dashboard_content_icons_sprite@2x.png
+     [java] Updated resource /themes/default/images/dashboard_designer_sprite.png
+     [java] Updated resource /themes/default/images/dashboard_toolbar_buttons_sprite.png
+     [java] Updated resource /themes/default/images/dashlet_icons_sprite.png
+     [java] Updated resource /themes/default/images/dialog_button_capsule_sprite.png
+     [java] Updated resource /themes/default/images/dialogClose.png
+     [java] Updated resource /themes/default/images/disclosure_icons_sprite@1x.png
+     [java] Updated resource /themes/default/images/disclosure_icons_sprite@2x.png
+     [java] Updated resource /themes/default/images/disclosure_indicators_icons_sprite.svg
+     [java] Updated resource /themes/default/images/disclosure_indicators_sprite.png
+     [java] Updated resource /themes/default/images/favicon.ico
+     [java] Updated resource /themes/default/images/file_tree_icons_sprite.svg
+     [java] Updated resource /themes/default/images/file_type_icons_sprite.svg
+     [java] Updated resource /themes/default/images/floatingMenu_sprite.png
+     [java] Updated resource /themes/default/images/gears_button.png
+     [java] Updated resource /themes/default/images/grid_20x20_bkgd.png
+     [java] Updated resource /themes/default/images/gr-link.png
+     [java] Updated resource /themes/default/images/gr-link-theme.png
+     [java] Updated resource /themes/default/images/home_bkgd.png
+     [java] Updated resource /themes/default/images/home_icons_sprite.png
+     [java] Updated resource /themes/default/images/homePages_icons_sprite.png
+     [java] Updated resource /themes/default/images/homePages_icons_sprite-2x.png
+     [java] Updated resource /themes/default/images/icontrol_icons_sprite.png
+     [java] Updated resource /themes/default/images/inner_pagination_sprite.png
+     [java] Updated resource /themes/default/images/input_bkgd.png
+     [java] Updated resource /themes/default/images/line_thumb.png
+     [java] Updated resource /themes/default/images/list_icons_sprite@1x.png
+     [java] Updated resource /themes/default/images/list_icons_sprite@2x.png
+     [java] Updated resource /themes/default/images/list_node_animation.gif
+     [java] Updated resource /themes/default/images/list_pressed_bkgd.png
+     [java] Updated resource /themes/default/images/lists_sprite.png
+     [java] Updated resource /themes/default/images/loadinfo.gif
+     [java] Updated resource /themes/default/images/log_collectors.png
+     [java] Updated resource /themes/default/images/login_devices.png
+     [java] Updated resource /themes/default/images/login_devices-2x.png
+     [java] Updated resource /themes/default/images/login_welcome_bkgd.jpg
+     [java] Updated resource /themes/default/images/login_welcome_ce_bkgd.jpg
+     [java] Updated resource /themes/default/images/logo_jrws.svg
+     [java] Updated resource /themes/default/images/logo_reverse.svg
+     [java] Updated resource /themes/default/images/logo_welcome.png
+     [java] Updated resource /themes/default/images/logo_welcome.svg
+     [java] Updated resource /themes/default/images/logo.png
+     [java] Updated resource /themes/default/images/menu_primaryNav_sprite.png
+     [java] Updated resource /themes/default/images/message_icons_sprite.png
+     [java] Updated resource /themes/default/images/panel_inset_inset_bkgd.png
+     [java] Updated resource /themes/default/images/panel_sizer_sprite.png
+     [java] Updated resource /themes/default/images/panels_icons_sprite.png
+     [java] Updated resource /themes/default/images/percent_area_thumb.png
+     [java] Updated resource /themes/default/images/percent_bar_thumb.png
+     [java] Updated resource /themes/default/images/percent_column_thumb.png
+     [java] Updated resource /themes/default/images/pie_thumb.png
+     [java] Updated resource /themes/default/images/report_load_animation.gif
+     [java] Updated resource /themes/default/images/resources_icons_sprite@1x.png
+     [java] Updated resource /themes/default/images/resources_icons_sprite@2x.png
+     [java] Updated resource /themes/default/images/search_icons_sprite@1x.png
+     [java] Updated resource /themes/default/images/search_icons_sprite@2x.png
+     [java] Updated resource /themes/default/images/search_sprite.png
+     [java] Updated resource /themes/default/images/select_data_icons_sprite.png
+     [java] Updated resource /themes/default/images/slider_bkgd.png
+     [java] Updated resource /themes/default/images/slider_fill.png
+     [java] Updated resource /themes/default/images/slider_fill@1x.png
+     [java] Updated resource /themes/default/images/slider_fill@2x.png
+     [java] Updated resource /themes/default/images/slider_handle.png
+     [java] Updated resource /themes/default/images/slider_tickMark.png
+     [java] Updated resource /themes/default/images/slider_tickMark@1x.png
+     [java] Updated resource /themes/default/images/slider_tickMark@2x.png
+     [java] Updated resource /themes/default/images/sort_filter_icons_sprite.png
+     [java] Updated resource /themes/default/images/sort_indicators_icons_sprite@1x.png
+     [java] Updated resource /themes/default/images/sort_indicators_icons_sprite@2x.png
+     [java] Updated resource /themes/default/images/sort_indicators_sprite.png
+     [java] Updated resource /themes/default/images/spacer.gif
+     [java] Updated resource /themes/default/images/stacked_area_thumb.png
+     [java] Updated resource /themes/default/images/stacked_bar_thumb.png
+     [java] Updated resource /themes/default/images/stacked_column_thumb.png
+     [java] Updated resource /themes/default/images/tabs_horizontal_buttons_bkgd.png
+     [java] Updated resource /themes/default/images/tabs_horizontal_sprite.png
+     [java] Updated resource /themes/default/images/tabs_vertical_sprite.png
+     [java] Updated resource /themes/default/images/viewer_toolbar_buttons_sprite.png
+     [java] Updated resource /themes/default/images/wait_animation_large.gif
+     [java] Updated resource /themes/default/images/workflow_icons_sprite@05x.png
+     [java] Updated resource /themes/default/images/workflow_icons_sprite@1x.png
+     [java] Updated resource /themes/default/images/workflow_icons_sprite@2x.png
+     [java] Updated resource /themes/default/jasper-ui/jasper-ui.css
+     [java] Updated resource /themes/default/jquery-ui/jquery-ui.css
+     [java] Updated resource /themes/jasper_dark/images/adhoc_datatree_icons_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/banner_bkgd.png
+     [java] Updated resource /themes/jasper_dark/images/button_action_primary_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/button_capsule_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/dashboard_designer_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/dialog_button_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/disclosure_indicators_icons_sprite@1x.png
+     [java] Updated resource /themes/jasper_dark/images/disclosure_indicators_icons_sprite@2x.png
+     [java] Updated resource /themes/jasper_dark/images/disclosure_indicators_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/footer_bkgd.png
+     [java] Updated resource /themes/jasper_dark/images/home_bkgd.png
+     [java] Updated resource /themes/jasper_dark/images/home_icons_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/homePages_icons_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/homePages_icons_sprite-2x.png
+     [java] Updated resource /themes/jasper_dark/images/list_node_animation.gif
+     [java] Updated resource /themes/jasper_dark/images/lists_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/login_devices-2x.png
+     [java] Updated resource /themes/jasper_dark/images/logo_welcome.svg
+     [java] Updated resource /themes/jasper_dark/images/menu_primaryNav_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/search_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/tabs_horizontal_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/tabs_vertical_sprite.png
+     [java] Updated resource /themes/jasper_dark/images/tree_icons_sprite.svg
+     [java] Updated resource /themes/jasper_dark/images/ui-icons_469bdd_256x240.png
+     [java] Updated resource /themes/jasper_dark/images/wait_animation_large.gif
+     [java] Updated resource /themes/pods_summer/images/adhoc_toolbar_buttons_sprite.png
+     [java] Updated resource /themes/pods_summer/images/banner_bkgd.png
+     [java] Updated resource /themes/pods_summer/images/bg_signin.jpg
+     [java] Updated resource /themes/pods_summer/images/body_bkgnd.png
+     [java] Updated resource /themes/pods_summer/images/button_action_primary_sprite.png
+     [java] Updated resource /themes/pods_summer/images/button_capsule_sprite.png
+     [java] Updated resource /themes/pods_summer/images/disclosure_indicators_icons_sprite@1x.png
+     [java] Updated resource /themes/pods_summer/images/disclosure_indicators_icons_sprite@2x.png
+     [java] Updated resource /themes/pods_summer/images/disclosure_indicators_sprite.png
+     [java] Updated resource /themes/pods_summer/images/footer_bkgd.png
+     [java] Updated resource /themes/pods_summer/images/gr-link-theme.png
+     [java] Updated resource /themes/pods_summer/images/lists_sprite.png
+     [java] Updated resource /themes/pods_summer/images/logo_welcome.svg
+     [java] Updated resource /themes/pods_summer/images/search_icons_sprite@1x.png
+     [java] Updated resource /themes/pods_summer/images/search_icons_sprite@2x.png
+     [java] Updated resource /themes/pods_summer/images/tabs_horizontal_sprite.png
+     [java] Updated resource /themes/pods_summer/images/tabs_vertical_sprite.png
+     [java] Updated resource /themes/default/jasper-ui/fonts/icons.eot
+     [java] Updated resource /themes/default/jasper-ui/fonts/icons.svg
+     [java] Updated resource /themes/default/jasper-ui/fonts/icons.ttf
+     [java] Updated resource /themes/default/jasper-ui/fonts/icons.woff
+     [java] Updated resource /themes/default/jasper-ui/fonts/sourcesanspro-bold.ttf
+     [java] Updated resource /themes/default/jasper-ui/fonts/sourcesanspro-bold-webfont.woff
+     [java] Updated resource /themes/default/jasper-ui/fonts/sourcesanspro-bold-webfont.woff2
+     [java] Updated resource /themes/default/jasper-ui/fonts/sourcesanspro-regular.ttf
+     [java] Updated resource /themes/default/jasper-ui/fonts/sourcesanspro-regular-webfont.woff
+     [java] Updated resource /themes/default/jasper-ui/fonts/sourcesanspro-regular-webfont.woff2
+     [java] Updated resource /themes/default/jasper-ui/fonts/sourcesanspro-semibold.ttf
+     [java] Updated resource /themes/default/jasper-ui/fonts/sourcesanspro-semibold-webfont.woff
+     [java] Updated resource /themes/default/jasper-ui/fonts/sourcesanspro-semibold-webfont.woff2
+     [java] Updated resource /themes/default/jasper-ui/images/beta-icon.svg
+     [java] Updated resource /themes/default/jasper-ui/images/bg.jpg
+     [java] Updated resource /themes/default/jasper-ui/images/button_action_icons_sprite.png
+     [java] Updated resource /themes/default/jasper-ui/images/chart-type-icon-mono-sprite.svg
+     [java] Updated resource /themes/default/jasper-ui/images/chart-type-icon-sprite.svg
+     [java] Updated resource /themes/default/jasper-ui/images/column_header_bkgd.png
+     [java] Updated resource /themes/default/jasper-ui/images/control_icons_sprite.png
+     [java] Updated resource /themes/default/jasper-ui/images/domain-tree-icons-sprite.svg
+     [java] Updated resource /themes/default/jasper-ui/images/file_type_icons_sprite.svg
+     [java] Updated resource /themes/default/jasper-ui/images/glyph_icons_sprite.svg
+     [java] Updated resource /themes/default/jasper-ui/images/glyph_icons_sprite-responsive.svg
+     [java] Updated resource /themes/default/jasper-ui/images/gr-link.png
+     [java] Updated resource /themes/default/jasper-ui/images/icontrol_icons_sprite.png
+     [java] Updated resource /themes/default/jasper-ui/images/jr-loading_animation.gif
+     [java] Updated resource /themes/default/jasper-ui/images/list_node_animation.gif
+     [java] Updated resource /themes/default/jasper-ui/images/logo_amazon.svg
+     [java] Updated resource /themes/default/jasper-ui/images/logo_aws.png
+     [java] Updated resource /themes/default/jasper-ui/images/logo_tibco.svg
+     [java] Updated resource /themes/default/jasper-ui/images/sizer_icons_sprite.png
+     [java] Updated resource /themes/default/jasper-ui/images/sort_filter_icons_sprite.png
+     [java] Updated resource /themes/default/jasper-ui/images/tiny_minus.png
+     [java] Updated resource /themes/default/jasper-ui/images/tiny_plus.png
+     [java] Updated resource /themes/default/jasper-ui/images/tree_icons_sprite.svg
+     [java] Updated resource /themes/default/jasper-ui/images/workflow_icons_sprite.svg
+     [java] Updated resource /themes/default/jquery-ui/images/animated-overlay.gif
+     [java] Updated resource /themes/default/jquery-ui/images/ui-bg_flat_0_aaaaaa_40x100.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-bg_flat_55_fbec88_40x100.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-bg_glass_75_d0e5f5_1x400.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-bg_glass_85_dfeffc_1x400.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-bg_glass_95_fef1ec_1x400.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-bg_inset-hard_100_f5f8f9_1x100.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-bg_inset-hard_100_fcfdfd_1x100.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-icons_217bc0_256x240.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-icons_2e83ff_256x240.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-icons_469bdd_256x240.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-icons_6da8d5_256x240.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-icons_cd0a0a_256x240.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-icons_d8e7f3_256x240.png
+     [java] Updated resource /themes/default/jquery-ui/images/ui-icons_f9bd01_256x240.png
+     [java] Done
+
+deploy-webapp-ce-if-needed:
+
+do-deploy-webapp-if-needed:
+
+init-source-paths:
+     [echo]  --- (dev.xml:init-source-paths) maven-localrepo-path = ?/.m2/repository --- 
+     [echo]     js-path = ${js-base-path}
+     [echo] js-pro-path = 
+
+set-ce-webapp-name:
+     [copy] Copying 1 file to /opt/bitnami/jasperreports/buildomatic/build_conf/default
+     [copy] Copying 5 files to /opt/bitnami/jasperreports/buildomatic/build_conf/default/webapp/WEB-INF
+
+deploy-jdbc-jar:
+     [echo] Copy JDBC drivers in 'conf_source/db/app-srv-jdbc-drivers' to the app-server '/opt/bitnami/tomcat/lib'
+     [echo] Did not need to delete an extra jdbc driver
+     [echo] About to copy JS repository JDBC driver (if it exists):
+     [echo]   Copy jdbc driver from: /opt/bitnami/jasperreports/buildomatic/conf_source/db/mysql/jdbc/mariadb-java-client-2.5.3.jar
+     [echo]   Copy jdbc driver to:   /opt/bitnami/tomcat/lib
+
+deploy-webapp:
+     [echo] About to copy JDBC driver for import-export config (if it exists):
+     [echo]  --- (app-server.xml:deploy-webapp) --- 
+     [echo]     jsEdition = ce
+     [echo]  warFileDistSourceDir = /opt/bitnami/jasperreports/buildomatic/../jasperserver.war
+     [echo]    warTargetDir = /opt/bitnami/tomcat/webapps/jasperserver
+     [echo]      webAppName = jasperserver
+     [echo]    webAppNameCE = jasperserver
+     [echo]   webAppNamePro = jasperserver-pro
+     [echo]   webAppNameSrc = jasperserver 
+     [echo]   webAppNameDel = jasperserver
+     [echo]  warTargetDirDel = ${warTargetDirDel}
+     [echo]  
+    [unzip] Expanding: /opt/bitnami/jasperreports/jasperserver.war into /opt/bitnami/tomcat/webapps/jasperserver
+     [echo] Back-End version: fatal: not a git repository (or any of the parent directories): .git-SNAPSHOT
+     [echo] Front-End version: fatal: not a git repository (or any of the parent directories): .git-SNAPSHOT
+     [echo] chkAndSetLocaleDbSettings: parse: scripts.properties for db commands
+     [echo] Maven settings: /opt/bitnami/jasperreports/buildomatic/build_conf/default/maven_settings.xml
+
+init-source-paths:
+     [echo]  --- (dev.xml:init-source-paths) maven-localrepo-path = ?/.m2/repository --- 
+     [echo]     js-path = ${js-base-path}
+     [echo] js-pro-path = 
+
+setup-groovy:
+     [echo] Found Groovy in import lib directory
+
+deploy-webapp-datasource-configs:
+     [echo]  --- (app-server.xml:deploy-webapp-datasource-configs) --- 
+     [echo]  jsEdition     = ce
+     [echo]  warFileDistSourceDir = /opt/bitnami/jasperreports/buildomatic/../jasperserver.war
+     [echo]  warTargetDir  = /opt/bitnami/tomcat/webapps/jasperserver
+     [echo]  webAppName    = jasperserver
+     [echo]  webAppNameCE  = jasperserver
+     [echo]  webAppNamePro = jasperserver-pro
+     [echo]  webAppNameSrc = jasperserver 
+     [echo]  webAppNameDel = jasperserver, warTargetDirDel = ${warTargetDirDel}
+     [copy] Copying 9 files to /opt/bitnami/tomcat/webapps/jasperserver
+   [delete] Deleting directory /opt/bitnami/tomcat/work/Catalina/localhost/jasperserver
+
+scalableAdhoc-refinement:
+
+deploy-webapp-ce:
+
+upgrade-minimal-ce:
+     [echo] Upgrade successfully completed!
+
+BUILD SUCCESSFUL
+Total time: 28 seconds
+Checking Ant return code: OK
+----------------------------------------------------------------------

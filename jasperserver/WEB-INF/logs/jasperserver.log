@@ -1,0 +1,1 @@
+2023-07-10T19:17:57,087 ERROR CsrfGuard,http-nio-8080-exec-2:45 - potential cross-site request forgery (CSRF) attack thwarted (user:<anonymous>, ip:139.144.16.161, method:POST, uri:/jasperserver/exituser.html, error:CsrfGuard expects the token to exist in session at this point)
